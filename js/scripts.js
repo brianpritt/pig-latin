@@ -1,33 +1,51 @@
-var vowels = ["a","e","i","o","u"];
 
 var translator = function(input){
-  inputArray = input.split("");
   var ayWord;
   var trucatedArray;
+  var inputArray;
+  // if (/[/s]/i.test(input)){
+  //   console.log("space");
+  //   inputWords = input.split(" ");
+  //
+  //   // for (i = 0; i < inputWords.length; i++) {
+  //   //   console.log(i);
+  //   // }
+  //
+  // }
+  // else {
+  inputArray = input.split("");
 
-  if (inputArray[0] === "a"||inputArray[0] ===  "e" ||inputArray[0] === "i" ||inputArray[0] === "o" ||inputArray[0] === "u") {//handles single letter words and words that start with vowels
-      ayWord = input + "ay";
-   } else if{ 
+    if (/[a-z]/i.test(inputArray[0]) === false){
+      return inputArray.join("");
+    }
 
+    else if(/[aeiou]/i.test(inputArray[0])) {//handles single letter words and words that start with vowels
+        ayWord = input + "ay";
+     }
 
+     else if(inputArray[0] === "q" && inputArray[1] === "u"){//handles words with qu
+       firstLetter = inputArray.splice(0,2).join("");
+       ayWord = inputArray.join("") + firstLetter + "ay";
+     }
 
+     else if ((/[^aeiou]/i.test(inputArray[0])) && (/[aeiou]/i.test(inputArray[1]))){
+       firstLetter = inputArray.splice(0,1).join("");
+       ayWord = inputArray.join("") + firstLetter + "ay";
 
+     }
+     else  { //ends if for starting with vowel begin words beginning consonants //last arguement
+       for (var i = 0; i < inputArray.length; i++){
+         if (/[aeiou]/i.test(inputArray[i])){
 
+           firstLetter = inputArray.splice(0,i).join("");
+           ayWord = inputArray.join("") + firstLetter + "ay";
+           return ayWord;
+         }
+       }
+    }//end if
+    return ayWord;
 
-
-
-
-
-
-
-   }else  { //ends if for starting with vowel begin words beginning consonants //last arguement
-
-     firstLetter = inputArray.splice(0,1).toString();
-     ayWord = inputArray.join("") + firstLetter + "ay";
-
-
-  }//end if
-  return ayWord;
+  // }
 };//end translator
 
 
