@@ -1,17 +1,18 @@
-var input = "b";
+var input = "pear";
 var vowels = ["a","e","i","o","u"];
 
-
-
 var translator = function(input){
-  var blah;
+  inputArray = input.split("");
+  var ayWord;
   vowels.forEach(function(vowel) {
-    if (input === vowel) {
-      var blah = input + "ay";
-    }
-  });
-return blah;
-};
+    if (inputArray[0] === vowel) {//handles single letter words and words that start with vowels
+     ayWord = input + "ay";
+   };//end if
+ });//end vowel forEach
+  return ayWord;
+};//end translator
+
+
 var translatedString = translator(input);
 console.log(translatedString);
 
