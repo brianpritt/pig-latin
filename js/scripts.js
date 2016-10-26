@@ -1,18 +1,27 @@
+var multiWord = function(input) {
+  if (/[\s]/i.test(input)){
+    var inputWords = input.split(" ");
+    var sentArray = [];
+    var translatedWord;
+
+    for (i = 0; i < inputWords.length; i++) {
+      translatedWord = translator(inputWords[i]);
+      sentArray.push(translatedWord);
+    }
+    return sentArray.join(" ");
+  }
+  else {
+    return translator(input);
+
+}
+}
+
 
 var translator = function(input){
   var ayWord;
   var trucatedArray;
   var inputArray;
-  // if (/[/s]/i.test(input)){
-  //   console.log("space");
-  //   inputWords = input.split(" ");
-  //
-  //   // for (i = 0; i < inputWords.length; i++) {
-  //   //   console.log(i);
-  //   // }
-  //
-  // }
-  // else {
+
   inputArray = input.split("");
 
     if (/[a-z]/i.test(inputArray[0]) === false){
@@ -45,7 +54,6 @@ var translator = function(input){
     }//end if
     return ayWord;
 
-  // }
 };//end translator
 
 
@@ -54,8 +62,9 @@ $(document).ready(function(){
   $("form").submit(function(event){
     event.preventDefault();
     var inputString = $("#user-input").val();
-    var translatedString = translator(inputString);
+    var translatedString = multiWord(inputString);
 
+    $("#translated-output").show();
     $("#translated-output h4").text(translatedString);
   });
 
